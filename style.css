@@ -1,0 +1,32 @@
+/* latin-ext */
+@font-face {
+  font-family: 'Gingham';
+  font-style: normal;
+  font-weight: 500;
+  src: url(fonts/Gingham.woff2) format('woff2');
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+
+  color: #333;
+
+  font-weight: 500;
+  font-family: 'Gingham';
+  font-size: 48px;
+  text-transform: uppercase;
+}
+
+#centered {
+  font-variation-settings: "wght" 500;
+
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
