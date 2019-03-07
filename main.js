@@ -1,47 +1,19 @@
-window.addEventListener('deviceorientation', function(event) {
-  document.getElementById('centered').style.fontVariationSettings = '"wght" ' + event.beta * 10;
-});
-
-let layer = 1;
-
-function morphForLayer(layer) {
-  return polymorph.interpolate(['#vertical #Layer_' + layer + ' path', '#vertical #Layer_' + (layer + 1) + ' path'], {
-    origin: { x: 0, y: 0 },
-    optimize: 'none',
-    precision: 5
-  });
-}
-
-function morphForLayer2(layer) {
+function setDisplay(layer, display) {
   const e = document.getElementById('vertical');
-  const p1 = e.children[layer].children[0].getAttribute('d');
-  const p2 = e.children[layer + 1].children[0].getAttribute('d');
-  return flubber.interpolate(p1, p2, {
-    maxSegmentLength: 0.5
-  });
+  e.children[layer].style['display'] = display;
 }
 
-let morph = morphForLayer2(layer);
+int visible_layer = 0;
 
-const target = document.getElementById('target');
+for (let i = 0; i <= 7; i++) {
+  setDisplay(i, 'none');
+}
 
-let t = 0;
+setDisplay(visible_layer, 'unset');
 
-const timer = setInterval(() => {
-  t += 0.01;
-
-  if (t > 1.0) {
-    layer++;
-
-    if (layer <= 6) {
-      t = 0.0;
-      morph = morphForLayer2(layer);
-    }
-    else {
-      clearInterval(timer);
-    }
-  }
-  else {
-    target.setAttribute('d', morph(t));
-  }
-}, 10);
+window.addEventListener('deviceorientation', function(event) {
+  setDisplay(visible_layer, 'none');
+  visible_layer = event.beta * 3;
+  visible_layer = Math.min(7, Math.max(0, visible_layer));
+  setDisplay(visible_layer, 'unset');
+});
