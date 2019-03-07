@@ -16,4 +16,7 @@ window.addEventListener('deviceorientation', function(event) {
   visible_layer = event.beta * 3;
   visible_layer = Math.min(7, Math.max(0, visible_layer));
   setDisplay(visible_layer, 'unset');
+
+  const e = document.getElementById('beta');
+  e.innerHTML = event.beta + ', ' + visible_layer;
 });
