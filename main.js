@@ -28,7 +28,7 @@ const target = document.getElementById('target');
 let t = 0;
 
 const timer = setInterval(() => {
-  t += 0.3;
+  t += 0.01;
 
   if (t > 1.0) {
     layer++;
