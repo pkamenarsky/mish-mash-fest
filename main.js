@@ -3,7 +3,7 @@ function setDisplay(layer, display) {
   e.children[layer].style['display'] = display;
 }
 
-int visible_layer = 0;
+let visible_layer = 0;
 
 for (let i = 0; i <= 7; i++) {
   setDisplay(i, 'none');
