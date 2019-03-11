@@ -3,20 +3,37 @@ function setDisplay(layer, display) {
   e.children[layer].style['display'] = display;
 }
 
-let visible_layer = 0;
+let visible_layers = new Array(12).fill(2);
 
-for (let i = 0; i <= 7; i++) {
-  setDisplay(i, 'none');
+function toLayer(e, frame) {
+  return e + '_' + frame;
 }
 
-setDisplay(visible_layer, 'unset');
+function updateLayers() {
+  for (let i = 0; i <= 12; i++) {
+    for (let j = 0; j < 5; j++) {
+      setDisplay(toLayer(i, j), 'none');
+    }
+  }
+
+  for (let i = 0; i <= 12; i++) {
+    setDisplay(toLayer(i, visible_layers[i]), 'unset');
+  }
+}
+
+// updateLayers();
 
 window.addEventListener('deviceorientation', function(event) {
-  setDisplay(visible_layer, 'none');
-  visible_layer = Math.round((event.beta - 50) / -2) + 3;
-  visible_layer = Math.min(7, Math.max(0, visible_layer));
-  setDisplay(visible_layer, 'unset');
+  // visible_layer = Math.round((event.beta - 50) / -2) + 3;
+  // visible_layer = Math.min(7, Math.max(0, visible_layer));
+  // updateLayers();
 
-  // const e = document.getElementById('beta');
-  // e.innerHTML = event.beta + ', ' + visible_layer;
+  const e = document.getElementById('alpha');
+  e.innerHTML = event.alpha;
+
+  const e = document.getElementById('beta');
+  e.innerHTML = event.beta;
+
+  const e = document.getElementById('gamma');
+  e.innerHTML = event.gamma;
 });
