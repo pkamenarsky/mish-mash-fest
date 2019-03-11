@@ -28,12 +28,12 @@ window.addEventListener('deviceorientation', function(event) {
   // visible_layer = Math.min(7, Math.max(0, visible_layer));
   // updateLayers();
 
-  const e = document.getElementById('alpha');
+  let e = document.getElementById('alpha');
   e.innerHTML = event.alpha;
 
-  const e = document.getElementById('beta');
+  e = document.getElementById('beta');
   e.innerHTML = event.beta;
 
-  const e = document.getElementById('gamma');
+  e = document.getElementById('gamma');
   e.innerHTML = event.gamma;
 });
