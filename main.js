@@ -49,24 +49,28 @@ function displayLayersConsole() {
   }
 }
 
+function xlerp(a, b, f) {
+  return (b - a) * f + a;
+}
+
 function computeLayers(posX, posY) {
-  const tl = 0;
-  const tr = 0;
-  const bl = 0;
-  const br = 0;
+  const l = xlerp(5, 1, posX);
+  const r = xlerp(1, 5, posX);
+  const t = xlerp(5, 1, posY);
+  const b = xlerp(1, 5, posY);
 
   for (let y = 0; y < 3; y++) {
     for (let x = 0; x < 4; x++) {
       const nX = x / 3.0, nY = y / 2.0;
-      const dX = posX - nX, dY = posY - nY;
-      const d = dX * dX + dY * dY;
+      visible_layers[x + y * 4] = xlerp(l, r, nX);
+    }
+  }
 
-      // 0.5 = everything 3
-      // 1 = right 5, left 1
-      // 0 = left 5, right 1
-      visible_layers[x + y * 4] = d;
-      // visible_layers[x + y * 4] = Math.round(d * 100);
-      // visible_layers[x + y * 4] = Math.round(nX * 10) + ':' + Math.round(nY * 10);
+  for (let y = 0; y < 3; y++) {
+    for (let x = 0; x < 4; x++) {
+      const nX = x / 3.0, nY = y / 2.0;
+      visible_layers[x + y * 4] *= xlerp(t, b, nY);
+      visible_layers[x + y * 4] = Math.round(Math.sqrt(visible_layers[x + y * 4]));
     }
   }
 }
@@ -102,5 +106,4 @@ function run() {
   });
 }
 
-computeLayers(0.5, 0.5);
-displayLayersConsole();
+run();
