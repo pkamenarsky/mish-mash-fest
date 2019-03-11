@@ -88,6 +88,10 @@ function computeLayers(posX, posY) {
   }
 }
 
+function normalize(s, e, v) {
+  return (Math.max(s, Math.min(e, v)) - s) / (e - s);
+}
+
 function run() {
   svg = document.getElementById('svg');
 
@@ -95,18 +99,18 @@ function run() {
   updateLayers();
 
   window.addEventListener('deviceorientation', function(event) {
-    const posX = (Math.max(-10, Math.min(10, event.gamma)) + 10) / 20;
-    const posY = (Math.max(20, Math.min(50, event.beta)) - 20) / 30;
+    const posX = normalize(-20, 20, event.gamma);
+    const posY = normalize(10, 40, event.beta);
 
     computeLayers(posX, posY);
-    displayLayers();
+    // displayLayers();
     updateLayers();
 
-    let e = document.getElementById('posx');
-    e.innerHTML = posX;
+    // let e = document.getElementById('posx');
+    // e.innerHTML = posX;
 
-    e = document.getElementById('posy');
-    e.innerHTML = posY;
+    // e = document.getElementById('posy');
+    // e.innerHTML = posY;
 
     // let e = document.getElementById('alpha');
     // e.innerHTML = event.alpha;
