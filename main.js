@@ -1,9 +1,9 @@
-function setDisplay(layer, display) {
-  const e = document.getElementById('vertical');
-  e.children[layer].style['display'] = display;
-}
+let svg = null;
+let visible_layers = new Array(12).fill(3);
 
-let visible_layers = new Array(12).fill(2);
+function setDisplay(layer, display) {
+  svg.children[layer].style['display'] = display;
+}
 
 function toLayer(e, frame) {
   return e + '_' + frame;
@@ -20,8 +20,6 @@ function updateLayers() {
     setDisplay(toLayer(i, visible_layers[i]), 'unset');
   }
 }
-
-// updateLayers();
 
 function displayLayers() {
   const e = document.getElementById('layers');
@@ -76,6 +74,8 @@ function computeLayers(posX, posY) {
 }
 
 function run() {
+  svg = document.getElementById('svg');
+
   window.addEventListener('deviceorientation', function(event) {
     const posX = (Math.max(-10, Math.min(10, event.gamma)) + 10) / 20;
     const posY = (Math.max(20, Math.min(50, event.beta)) - 20) / 30;
@@ -102,4 +102,5 @@ function run() {
   });
 }
 
+// updateLayers();
 run();
