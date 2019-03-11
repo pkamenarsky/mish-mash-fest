@@ -10,13 +10,13 @@ function toLayer(e, frame) {
 }
 
 function updateLayers() {
-  for (let i = 0; i <= 12; i++) {
+  for (let i = 0; i < 12; i++) {
     for (let j = 0; j < 5; j++) {
       setDisplay(toLayer(i, j), 'none');
     }
   }
 
-  for (let i = 0; i <= 12; i++) {
+  for (let i = 0; i < 12; i++) {
     setDisplay(toLayer(i, visible_layers[i]), 'unset');
   }
 }
@@ -77,10 +77,6 @@ function computeLayers(posX, posY) {
 
 function run() {
   window.addEventListener('deviceorientation', function(event) {
-    // visible_layer = Math.round((event.beta - 50) / -2) + 3;
-    // visible_layer = Math.min(7, Math.max(0, visible_layer));
-    // updateLayers();
-
     const posX = (Math.max(-10, Math.min(10, event.gamma)) + 10) / 20;
     const posY = (Math.max(20, Math.min(50, event.beta)) - 20) / 30;
 
