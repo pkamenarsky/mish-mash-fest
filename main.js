@@ -82,8 +82,9 @@ function computeLayers(posX, posY) {
   for (let y = 0; y < 3; y++) {
     for (let x = 0; x < 4; x++) {
       const nX = x / 3.0, nY = y / 2.0;
-      visible_layers[x + y * 4] *= xlerp(t, b, nY);
-      visible_layers[x + y * 4] = Math.round(Math.sqrt(visible_layers[x + y * 4]));
+      // visible_layers[x + y * 4] *= xlerp(t, b, nY);
+      // visible_layers[x + y * 4] = Math.round(Math.sqrt(visible_layers[x + y * 4]));
+      visible_layers[x + y * 4] = Math.round(Math.max(xlerp(t, b, nY), visible_layers[x + y * 4]));
     }
   }
 }
