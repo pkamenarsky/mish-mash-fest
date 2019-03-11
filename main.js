@@ -110,7 +110,7 @@ function run() {
     const posY = normalize(10, 40, event.beta);
 
     computeLayers(posX, posY);
-    displayLayers();
+    // displayLayers();
     updateLayers();
 
     // let e = document.getElementById('posx');
