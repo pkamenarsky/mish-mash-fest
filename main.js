@@ -5,13 +5,28 @@ function setDisplay(layer, display) {
   svg.children[layer].style['display'] = display;
 }
 
+const layers = [
+  '_x31__x5F_',
+  '_x32__x5F_',
+  '_x33__x5F_',
+  '_x34__x5F_',
+  '_x35__x5F_',
+  '_x36__x5F_',
+  '_x37__x5F_',
+  '_x38__x5F_',
+  '_x39__x5F_',
+  '_x31_0_x5F_',
+  '_x31_1_x5F_',
+  '_x31_2_x5F_'
+];
+
 function toLayer(e, frame) {
-  return e + '_' + frame;
+  return layers[e] + frame;
 }
 
 function updateLayers() {
   for (let i = 0; i < 12; i++) {
-    for (let j = 0; j < 5; j++) {
+    for (let j = 1; j <= 5; j++) {
       setDisplay(toLayer(i, j), 'none');
     }
   }
@@ -76,12 +91,16 @@ function computeLayers(posX, posY) {
 function run() {
   svg = document.getElementById('svg');
 
+  computeLayers(0, 0);
+  updateLayers();
+
   window.addEventListener('deviceorientation', function(event) {
     const posX = (Math.max(-10, Math.min(10, event.gamma)) + 10) / 20;
     const posY = (Math.max(20, Math.min(50, event.beta)) - 20) / 30;
 
     computeLayers(posX, posY);
     displayLayers();
+    updateLayers();
 
     let e = document.getElementById('posx');
     e.innerHTML = posX;
@@ -102,5 +121,4 @@ function run() {
   });
 }
 
-// updateLayers();
 run();
