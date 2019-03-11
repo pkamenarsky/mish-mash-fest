@@ -66,6 +66,10 @@ function xlerp(a, b, f) {
   return (b - a) * f + a;
 }
 
+function d(x, a) {
+  return x < 3 ? x : a;
+}
+
 function computeLayers(posX, posY) {
   const l = xlerp(5, 1, posX);
   const r = xlerp(1, 5, posX);
@@ -82,9 +86,11 @@ function computeLayers(posX, posY) {
   for (let y = 0; y < 3; y++) {
     for (let x = 0; x < 4; x++) {
       const nX = x / 3.0, nY = y / 2.0;
+      const v = xlerp(t, b, nY);
       // visible_layers[x + y * 4] *= xlerp(t, b, nY);
       // visible_layers[x + y * 4] = Math.round(Math.sqrt(visible_layers[x + y * 4]));
       visible_layers[x + y * 4] = Math.round(Math.max(xlerp(t, b, nY), visible_layers[x + y * 4]));
+      // visible_layers[x + y * 4] = Math.round(d(v, visible_layers[x + y * 4]));
     }
   }
 }
